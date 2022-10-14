@@ -8,7 +8,7 @@ class DrivingLicenceNumberGeneratorTest {
     void underageApplicantCannotGetALicenceNumber() {
         Applicant applicant = new StubUnderAgeApplicant();
 
-        Logger logger = new DummyLogger();
+        SpyLogger logger = new SpyLogger();
         RandomNumbersGenerator generator = new DummyRandomNumbersGenerator();
 
         DrivingLicenceNumberGenerator licenceNumberGenerator = new DrivingLicenceNumberGenerator(generator, logger);
@@ -16,13 +16,16 @@ class DrivingLicenceNumberGeneratorTest {
         assertThrows(UnderAgeException.class, () -> {
             licenceNumberGenerator.generate(applicant);
         });
+
+        assertEquals(1, logger.countLogCalls());
+        assertTrue(logger.GetInfoForCall(1).contains("too young"));
     }
 
     @Test
     void licenceHolderCannotGetSecondLicence() {
         Applicant applicant = new StubLicenceHolderApplicant();
 
-        Logger logger = new DummyLogger();
+        SpyLogger logger = new SpyLogger();
         RandomNumbersGenerator generator = new DummyRandomNumbersGenerator();
 
         DrivingLicenceNumberGenerator licenceNumberGenerator = new DrivingLicenceNumberGenerator(generator, logger);
@@ -30,5 +33,8 @@ class DrivingLicenceNumberGeneratorTest {
         assertThrows(DuplicateApplicantException.class, () -> {
             licenceNumberGenerator.generate(applicant);
         });
+
+        assertEquals(1, logger.countLogCalls());
+        assertTrue(logger.GetInfoForCall(1).contains("duplicate"));
     }
 }

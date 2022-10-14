@@ -10,9 +10,11 @@ public class DrivingLicenceNumberGenerator {
 
     public String generate(Applicant applicant) throws UnderAgeException, DuplicateApplicantException {
         if (applicant.holdsDrivingLicence()) {
+            this.logger.Log("Applicant requested duplicate licence");
             throw new DuplicateApplicantException();
         }
 
+        this.logger.Log("Applicant was too young to get a licence");
         throw new UnderAgeException();
     }
 }
