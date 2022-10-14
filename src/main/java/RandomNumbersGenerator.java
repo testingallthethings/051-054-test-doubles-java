@@ -1,4 +1,4 @@
 public interface RandomNumbersGenerator {
 
-    String generateRandomNumber();
+    String generateRandomNumber(int count);
 }

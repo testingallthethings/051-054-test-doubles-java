@@ -1,4 +1,4 @@
 public interface Logger {
 
-    void Log();
+    void Log(String info);
 }
