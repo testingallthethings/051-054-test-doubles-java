@@ -4,8 +4,4 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DrivingLicenceNumberGeneratorTest {
 
-    @Test
-    void Holding() {
-        assertTrue(true);
-    }
 }
