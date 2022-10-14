@@ -46,14 +46,13 @@ class DrivingLicenceNumberGeneratorTest {
 
         Logger logger = new DummyLogger();
 
-        MockRandomNumbersGenerator generator = new MockRandomNumbersGenerator();
-        generator.setExpectedNumbers(4,"1234");
+        RandomNumbersGenerator generator = new FakeRandomNumbersGenerator();
 
         DrivingLicenceNumberGenerator licenceNumberGenerator = new DrivingLicenceNumberGenerator(generator, logger);
 
         String number = licenceNumberGenerator.generate(applicant);
 
-        assertEquals("MDB230920151234", number);
+        assertEquals("MDB230920150000", number);
     }
 
     @Test
@@ -64,16 +63,13 @@ class DrivingLicenceNumberGeneratorTest {
 
         Logger logger = new DummyLogger();
 
-        MockRandomNumbersGenerator generator = new MockRandomNumbersGenerator();
-        generator.setExpectedNumbers(5, "12345");
-        generator.setExpectedNumbers(6, "123456");
+        RandomNumbersGenerator generator = new FakeRandomNumbersGenerator();
 
         DrivingLicenceNumberGenerator licenceNumberGenerator = new DrivingLicenceNumberGenerator(generator, logger);
 
-        assertEquals("MB2309201512345", licenceNumberGenerator.generate(applicant));
+        assertEquals("MB2309201500000", licenceNumberGenerator.generate(applicant));
 
         applicant.setExpectedInitials("M");
-        assertEquals("M23092015123456", licenceNumberGenerator.generate(applicant));
-
+        assertEquals("M23092015000000", licenceNumberGenerator.generate(applicant));
     }
 }
