@@ -14,7 +14,14 @@ public class DrivingLicenceNumberGenerator {
             throw new DuplicateApplicantException();
         }
 
-        this.logger.Log("Applicant was too young to get a licence");
-        throw new UnderAgeException();
+        if (!applicant.isOver17()) {
+            this.logger.Log("Applicant was too young to get a licence");
+            throw new UnderAgeException();
+        }
+
+        String licence = applicant.getInitials() + applicant.getDateOfBirth();
+        int numOfRands = 15 - licence.length();
+
+        return  licence + this.randomNumbersGenerator.generateRandomNumber(numOfRands);
     }
 }
